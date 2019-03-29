@@ -24,3 +24,14 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlConnectionDb;
+
+
+/**
+ * Token expiration
+ * 60 seg * 60 min * 24 hs * 30 dias
+ */
+
+process.env.CADUCIDAD = 60 * 60 * 24 * 30;
+
+/**Semilla token */
+process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
