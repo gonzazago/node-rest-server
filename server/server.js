@@ -3,11 +3,17 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
+ const pathPublic = path.resolve(__dirname,'../public');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+//habilitar public
+console.log(pathPublic);
+app.use(express.static(pathPublic));
 
 
 

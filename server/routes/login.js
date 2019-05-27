@@ -38,8 +38,18 @@ app.post('/login', (req, res) => {
         });
     });
 
-
 });
+
+app.post('/google', (req, res) => {
+    console.log(req.body.idtoken);
+    let token= req.body.idtoken;
+
+    res.json({
+        token
+    })
+
+})
+
 
 
 
