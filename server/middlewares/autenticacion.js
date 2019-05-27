@@ -1,7 +1,7 @@
 /**Verificar token */
 
 const jwt = require('jsonwebtoken')
-const handlerError = require('../errors/handleError');
+const handlerError = require('../errors/handlerResponse');
 
 let verficarToken = (req, res, next) => {
 
