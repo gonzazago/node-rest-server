@@ -45,25 +45,21 @@ app.post('/google', async (req, res) => {
             return handlerResponse(false,errorcode.FORBIDEN,e,res)
         }
     );
-
-    Usuario.findOne({email: googleUser.email},(err,usuarioDb) =>{
+    Usuario.findOne({email: googleUser.mail},(err,usuarioDb) =>{
         if(err){
             return handlerResponse(false,errorcode.INTERNAL_ERROR,e,res);
         }
         if(!usuarioDb){
             let usuarioNew = new Usuario({
-                nombre: googleUser.name,
-                email: googleUser.email,
-                img: googleUser.picture,
-                password: ':)'
+                nombre: googleUser.nombre,
+                email: googleUser.mail,
+                img: googleUser.img,
+                password: bycript.hashSync(':)', 10),
+                google:true
             });
             usuarioNew.save((err,usuarioDb) =>{
                 if(err){
-                    //return handlerResponse(false,500,err,res);
-                    return res.status(500).json({
-                        ok: false,
-                        err
-                    });
+                    return handlerResponse(false,500,err,res);
                 }
 
                 let token = generateToken(usuarioDb);
@@ -85,10 +81,6 @@ app.post('/google', async (req, res) => {
             });
         }
     })
-    res.json({
-        token
-    })
-
 })
 
 /**COnfiguracion de google */
